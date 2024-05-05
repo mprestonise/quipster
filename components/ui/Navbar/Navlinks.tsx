@@ -21,19 +21,19 @@ export default function Navlinks({ user }: NavlinksProps) {
         <Link href="/" className={s.logo} aria-label="Logo">
           <Logo />
         </Link>
-        <nav className="ml-6 space-x-2 lg:block">
-          {user ? (
-            <Link href="/account" className={s.link}>
-              Account
-            </Link>
-          ) : (
-            <Link href="/" className={s.link}>
-              Pricing
-            </Link>
-          )}
-        </nav>
       </div>
       <div className="flex justify-end space-x-8">
+        <nav className="mr-6">
+            {user ? (
+              <Link href="/account" className={s.link}>
+                Account
+              </Link>
+            ) : (
+              <Link href="/" className={s.link}>
+                Pricing
+              </Link>
+            )}
+          </nav>
         {user ? (
           <form onSubmit={(e) => handleRequest(e, SignOut, router)}>
             <input type="hidden" name="pathName" value={usePathname()} />

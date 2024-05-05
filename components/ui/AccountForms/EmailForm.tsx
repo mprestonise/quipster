@@ -30,11 +30,11 @@ export default function EmailForm({
   return (
     <Card
       title="Your Email"
-      description="Please enter the email address you want to use to login."
+      description="Please enter the email address you want to use to login"
       footer={
         <div className="flex flex-col items-start justify-between sm:flex-row sm:items-center">
           <p className="pb-4 sm:pb-0">
-            We will email you to verify the change.
+            We will email you to verify the change
           </p>
           <Button
             variant="slim"
