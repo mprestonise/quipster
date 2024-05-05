@@ -200,6 +200,7 @@ export async function signUp(formData: FormData) {
     data.user.identities &&
     data.user.identities.length == 0
   ) {
+    console.log("What data is provided by supabase.auth?", data);
     redirectPath = getErrorRedirect(
       '/signin/signup',
       'Sign up failed.',
