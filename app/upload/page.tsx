@@ -1,17 +1,12 @@
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 
-export default async function Account() {
+export default async function Upload() {
   const supabase = createClient();
 
   const {
     data: { user }
   } = await supabase.auth.getUser();
-
-  const { data: userDetails } = await supabase
-    .from('users')
-    .select('*')
-    .single();
 
   const { data: subscription, error } = await supabase
     .from('subscriptions')
@@ -25,6 +20,10 @@ export default async function Account() {
 
   if (!user) {
     return redirect('/signin');
+  }
+
+  if (!subscription) {
+    return redirect('/');
   }
 
   return (
