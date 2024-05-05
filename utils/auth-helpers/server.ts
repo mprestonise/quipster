@@ -200,7 +200,6 @@ export async function signUp(formData: FormData) {
     data.user.identities &&
     data.user.identities.length == 0
   ) {
-    console.log("What data is provided by supabase.auth?", data);
     redirectPath = getErrorRedirect(
       '/signin/signup',
       'Sign up failed.',
@@ -308,12 +307,16 @@ export async function updateEmail(formData: FormData) {
 
 export async function updateName(formData: FormData) {
   // Get form data
-  const fullName = String(formData.get('fullName')).trim();
+  const fullName = String(formData.get('fullName'));
+  const userId = String(formData.get('userId'));
 
   const supabase = createClient();
-  const { error, data } = await supabase.auth.updateUser({
-    data: { full_name: fullName }
-  });
+  const { error, data } = await supabase
+    .from('users')
+    .update({ full_name: fullName })
+    .eq('id', userId)
+    .select('full_name')
+    .single();
 
   if (error) {
     return getErrorRedirect(
@@ -321,7 +324,7 @@ export async function updateName(formData: FormData) {
       'Your name could not be updated.',
       error.message
     );
-  } else if (data.user) {
+  } else if (data) {
     return getStatusRedirect(
       '/account',
       'Success!',
