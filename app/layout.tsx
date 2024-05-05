@@ -7,8 +7,8 @@ import { getURL } from '@/utils/helpers';
 import 'styles/main.css';
 
 const meta = {
-  title: 'Next.js Subscription Starter',
-  description: 'Brought to you by Vercel, Stripe, and Supabase.',
+  title: 'Quippy',
+  description: 'A clever caption generation buddy for your Instagram business account',
   cardImage: '/og.png',
   robots: 'follow, index',
   favicon: '/favicon.ico',
