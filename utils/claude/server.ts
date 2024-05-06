@@ -11,7 +11,7 @@ export async function generateCaption(prompt: string) {
     const image_data = Buffer.from(image_array_buffer).toString('base64');
 
     const generatedCaption = await anthropic.messages.create({
-      model: 'claude-3-opus-20240229',
+      model: 'claude-3-sonnet-20240229',
       max_tokens: 1024,
       messages: [
             {
