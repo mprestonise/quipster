@@ -27,13 +27,11 @@ export async function generateCaption(prompt: string) {
                     },
                     {
                       "type": "text",
-                      "text": "The client wants you to write a witty, friendly, and quirky caption for this photo that they can use when publishing this photo to Instagram"
+                      "text": `The client wants you to write a ${[prompt]} caption for this photo that they can use when publishing this photo to Instagram`
                   }
                 ],
             }
           ]
     });
-    console.log("The raw response from Claude", generateCaption);
-    console.log("Stripping out the message", generatedCaption.content[0].text);
     return generatedCaption.content[0].text;
   }
