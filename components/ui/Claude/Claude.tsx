@@ -9,7 +9,7 @@ export default function Claude() {
     let caption;
     const handleClaudeRequest = async () => {
         setIsSubmitting(true);
-        const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+        const anthropic = new Anthropic({ apiKey: process.env["ANTHROPIC_API_KEY"] });
         // const image_url = "https://i.etsystatic.com/18298644/r/il/785cfa/5510810648/il_1140xN.5510810648_flu0.jpg"
         const image_media_type = "image/jpeg"
         // const image_array_buffer = await ((await fetch(image_url)).arrayBuffer());
