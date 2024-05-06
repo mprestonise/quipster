@@ -10,7 +10,6 @@ export default function Claude() {
     const handleClaudeRequest = async () => {
         setIsSubmitting(true);
         caption = await requestCaption('do something');
-        console.log("We got a caption in Claude.tsx", caption);
         setIsSubmitting(false);
         return caption;
       };
