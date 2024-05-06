@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: meta.title,
     description: meta.description,
     referrer: 'origin-when-cross-origin',
-    keywords: ['Vercel', 'Supabase', 'Next.js', 'Stripe', 'Subscription'],
+    keywords: ['Image captions', 'Captions for Instagram posts', 'Auto-caption', 'Caption generation', 'Quippy'],
     authors: [{ name: 'Quippy', url: 'https://quipster.vercel.app/' }],
     creator: 'Quippy',
     publisher: 'Quippy',
