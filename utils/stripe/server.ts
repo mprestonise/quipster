@@ -156,7 +156,6 @@ export async function createStripePortal(currentPath: string) {
       });
       if (!url) {
         throw new Error('Could not create billing portal');
-        console.log('Error creating billingPortal session');
       }
       return url;
     } catch (err) {

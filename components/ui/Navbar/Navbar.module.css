@@ -3,7 +3,7 @@
 }
 
 .link {
-  @apply inline-flex items-center leading-6 font-medium transition ease-in-out duration-75 cursor-pointer text-zinc-200 rounded-md p-1;
+  @apply inline-flex items-center leading-6 font-medium transition ease-in-out duration-75 cursor-pointer text-zinc-200 p-1;
 }
 
 .link:hover {
@@ -11,9 +11,9 @@
 }
 
 .link:focus {
-  @apply outline-none text-zinc-100 ring-2 ring-pink-500 ring-opacity-50;
+  @apply outline-none text-zinc-100;
 }
 
 .logo {
-  @apply cursor-pointer rounded-full transform duration-100 ease-in-out;
+  @apply cursor-pointer transform duration-100 ease-in-out;
 }
