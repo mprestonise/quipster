@@ -33,5 +33,6 @@ export async function generateCaption(prompt: string) {
             }
           ]
     });
+    console.log("Did we get a caption?", generatedCaption);
     return generatedCaption;
   }
