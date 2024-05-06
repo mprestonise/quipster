@@ -34,14 +34,6 @@ export async function generateMetadata(): Promise<Metadata> {
       images: [meta.cardImage],
       type: 'website',
       siteName: meta.title
-    },
-    twitter: {
-      card: 'summary_large_image',
-      site: '@Vercel',
-      creator: '@Vercel',
-      title: meta.title,
-      description: meta.description,
-      images: [meta.cardImage]
     }
   };
 }
