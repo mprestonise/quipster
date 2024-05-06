@@ -10,6 +10,7 @@ export default function Claude() {
     const handleClaudeRequest = async () => {
         setIsSubmitting(true);
         caption = await requestCaption('do something');
+        console.log("The raw response from the client", caption);
         setIsSubmitting(false);
         return caption;
       };
