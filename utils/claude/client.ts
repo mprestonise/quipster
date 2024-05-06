@@ -1,7 +1,8 @@
-import Anthropic from '@anthropic-ai/sdk';
+'use client'
+
+import { generateCaption } from './server';
 
 // Define a function to create a Claude client for client-side operations
-console.log("creating anthropic client");
-export const anthropic = new Anthropic({ apiKey: process.env["ANTHROPIC_API_KEY"] });
-
-console.log(anthropic);
+export async function requestCaption(prompt: string) {
+    return await generateCaption(prompt);
+}
