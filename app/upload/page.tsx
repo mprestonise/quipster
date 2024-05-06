@@ -39,9 +39,9 @@ export default async function Upload() {
           <p className="max-w-2xl m-auto mt-5 text-xl text-zinc-200 sm:text-center sm:text-2xl">
             Upload your photo for Quippy to write a caption for
           </p>
-          <h3>Let's start with a dummy photo and known brand settings</h3>
-          <img src="https://i.etsystatic.com/18298644/r/il/785cfa/5510810648/il_1140xN.5510810648_flu0.jpg" alt="Statement Trapezoids" height="100" />
-          <p>Brand settings: Witty, Friendly, and Quirky</p>
+          <h3 className="mt-24 text-2xl font-bold text-white sm:text-center sm:text-3xl">Let's start with a dummy photo and known brand settings</h3>
+          <img src="https://i.etsystatic.com/18298644/r/il/785cfa/5510810648/il_1140xN.5510810648_flu0.jpg" alt="Statement Trapezoids" />
+          <p className="max-w-2xl m-auto mt-5 text-xl text-zinc-200 sm:text-center sm:text-2xl">Brand settings: Witty, Friendly, and Quirky</p>
           <Claude />
         </div>
       </div>
