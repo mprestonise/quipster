@@ -33,6 +33,6 @@ export async function generateCaption(prompt: string) {
             }
           ]
     });
-    console.log("Did we get a caption?", generatedCaption);
+    console.log("We got a caption in utils > server.ts", generatedCaption);
     return generatedCaption;
   }
