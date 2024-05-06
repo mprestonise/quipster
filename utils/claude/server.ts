@@ -5,8 +5,8 @@ import Anthropic from '@anthropic-ai/sdk';
 export async function generateCaption(prompt: string) {
     const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-    const image_url = "https://quipster.vercel.app/clouds.webp"
-    const image_media_type = "image/webp"
+    const image_url = "https://quipster.vercel.app/tiny-clouds.png"
+    const image_media_type = "image/png"
     const image_array_buffer = await ((await fetch(image_url)).arrayBuffer());
     const image_data = Buffer.from(image_array_buffer).toString('base64');
 
