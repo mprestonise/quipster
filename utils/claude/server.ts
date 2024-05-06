@@ -33,5 +33,7 @@ export async function generateCaption(prompt: string) {
             }
           ]
     });
+    console.log("The raw response from Claude", generateCaption);
+    console.log("Stripping out the message", generatedCaption.content[0].text);
     return generatedCaption.content[0].text;
   }
