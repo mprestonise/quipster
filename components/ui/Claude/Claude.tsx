@@ -6,13 +6,13 @@ import { requestCaption } from '@/utils/claude/client';
 
 export default function Claude() {
     const [isSubmitting, setIsSubmitting] = useState(false);
-    let caption;
+    const [caption, setCaption] = useState('');
+
     const handleClaudeRequest = async () => {
         setIsSubmitting(true);
-        caption = await requestCaption('do something');
-        console.log("The raw response from the client", caption);
+        const generatedCaption = await requestCaption('do something');
+        setCaption(generatedCaption);
         setIsSubmitting(false);
-        return caption;
       };
 
     return (
