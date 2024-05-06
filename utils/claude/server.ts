@@ -27,7 +27,7 @@ export async function generateCaption(prompt: string) {
                     },
                     {
                       "type": "text",
-                      "text": `The client wants you to write a ${[prompt]} caption for this photo that they can use when publishing this photo to Instagram`
+                      "text": `The client wants you to write a ${[prompt]} caption for this photo that they can use when publishing this photo to Instagram. Do not respond with any other text but the caption`
                   }
                 ],
             }
