@@ -1,16 +1,20 @@
 'use server'
 
-import { createClient } from '@/utils/supabase/server';
+import { createClient } from '@supabase/supabase-js'
 import { getErrorRedirect, getStatusRedirect } from 'utils/helpers';
 
 export async function storePhotoInBucket(photo: File) {
 
-    const supabase = createClient();
+     // Create a single supabase client for interacting with your database
+    const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
 
     const { data, error } = await supabase.storage.from('photos').upload('file_path', photo);
 
     console.log('Was something uploaded?', data, error);
-    
+
+    // Getting a 403 - Unauthorized
+    // const supabase = createClient('your_project_url', 'your_supabase_api_key') << That might be the fix?
+
     if (error) {
     return getErrorRedirect(
         '/upload',
