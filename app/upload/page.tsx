@@ -1,6 +1,7 @@
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import Claude from '@/components/ui/Claude/Claude';
+import Uploader from '@/components/ui/Uploader/Uploader';
 
 export default async function Upload() {
   const supabase = createClient();
@@ -41,6 +42,7 @@ export default async function Upload() {
           </p>
           <h3 className="mt-24 text-2xl font-bold text-white sm:text-center sm:text-3xl">Let's start with a dummy photo and known brand settings</h3>
           <img className="preview-image" src="/tiny-clouds.png" alt="Clouds" />
+          <Uploader />
           <p className="max-w-2xl m-auto mt-5 text-xl text-zinc-200 sm:text-center sm:text-2xl">Brand settings: Witty, Friendly, and Quirky</p>
           <Claude />
         </div>
