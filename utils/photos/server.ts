@@ -9,6 +9,8 @@ export async function storePhotoInBucket(photo: File) {
 
     const { data, error } = await supabase.storage.from('photos').upload('file_path', photo);
 
+    console.log('Was something uploaded?', data, error);
+    
     if (error) {
     return getErrorRedirect(
         '/upload',
