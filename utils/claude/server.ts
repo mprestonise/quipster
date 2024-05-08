@@ -11,7 +11,7 @@ export async function generateCaption(prompt: string) {
     const image_data = Buffer.from(image_array_buffer).toString('base64');
 
     const generatedCaption = await anthropic.messages.create({
-      model: 'claude-3-sonnet-20240229',
+      model: 'claude-3-haiku-20240229',
       max_tokens: 1024,
       messages: [
             {
@@ -27,7 +27,7 @@ export async function generateCaption(prompt: string) {
                     },
                     {
                       "type": "text",
-                      "text": `The client wants you to write a ${[prompt]} caption for this photo that they can use when publishing this photo to Instagram. Do not respond with any other text but the caption`
+                      "text": `Write an engaging, ${[prompt]} caption for this photo of a productso that it can be published to Instagram and engage buyers. Avoid adding anything other than the caption, avoid commentary, avoid any additional updates or notes`
                   }
                 ],
             }
