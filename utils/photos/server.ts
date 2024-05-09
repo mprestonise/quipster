@@ -4,6 +4,7 @@ import { createClient } from '@supabase/supabase-js'
 import { redirect } from 'next/navigation';
 import { getErrorRedirect, getStatusRedirect } from 'utils/helpers';
 import { v4 as uuid } from 'uuid';
+import clouds from '@/public/og.png';
 
 export async function redirectToPath(path: string) {
     return redirect(path);
@@ -13,6 +14,7 @@ export async function storePhotoInBucket(formData: FormData, user: Record<string
 
     // Get form data
     let photo = formData.get('photo')!;
+    console.log("what is photo?", typeof photo);
 
      // Create a single supabase client for interacting with your database
     const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
