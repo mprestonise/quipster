@@ -13,6 +13,7 @@ export default function Uploader(userid: Record<string, unknown> | undefined) {
     const handleUpload = async (e: React.FormEvent<HTMLFormElement>) => {
         setIsUploading(true);
         const uploadedPhoto = await uploadPhoto(e, userid);
+        console.log(uploadedPhoto);
         setPhoto(uploadedPhoto);
         setIsUploading(false);
       };
@@ -37,7 +38,6 @@ export default function Uploader(userid: Record<string, unknown> | undefined) {
         >
             {photo ? 'Uploaded' : 'Upload'}
       </Button>
-      {photo?.fullPath ? <img src={getURL + photo.fullPath} alt="uploaded image" className="preview-image" /> : null}
     </div>
     );
   }
