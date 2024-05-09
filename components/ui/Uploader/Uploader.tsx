@@ -1,23 +1,21 @@
 'use client';
 
 import Button from '@/components/ui/Button';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { uploadPhoto } from '@/utils/photos/client';
+import { storePhotoInBucket } from '@/utils/photos/server';
 
 export default function Uploader(uuid: Record<string, unknown> | undefined) {
-
+    const router = useRouter();
     const [isUploading, setIsUploading] = useState(false);
-    const [photo, setPhoto] = useState<any>();
+    const [photo, setPhoto] = useState();
 
     const handleUpload = async (e: React.FormEvent<HTMLFormElement>) => {
         setIsUploading(true);
-        e.preventDefault();
-        e.persist();
-        const uploadedPhoto = await uploadPhoto(e.currentTarget.files[0], uuid);
-        console.log("What is uploadedPhoto in Uploader.tsx?", uploadedPhoto);
-        setPhoto(uploadedPhoto);
+        uploadPhoto(e, uuid, storePhotoInBucket, router);
         setIsUploading(false);
-    };
+      };
 
     return (
     <div className="max-w-2xl m-auto mt-5 text-sm sm:text-center sm:text-xs">
