@@ -4,7 +4,7 @@ import Button from '@/components/ui/Button';
 import { useState } from 'react';
 import { uploadPhoto } from '@/utils/photos/client';
 
-export default function Uploader() {
+export default function Uploader(user: string) {
     const [isUploading, setIsUploading] = useState(false);
     const [photo, setPhoto] = useState('');
 
@@ -12,7 +12,7 @@ export default function Uploader() {
         setIsUploading(true);
         console.log('What is the e.currentTarget.files object?', e.currentTarget.files);
         e.preventDefault();
-        const uploadedPhoto = await uploadPhoto(e.currentTarget.files);
+        const uploadedPhoto = await uploadPhoto(e.currentTarget.files, user);
         setPhoto(uploadedPhoto);
         setIsUploading(false);
     };
