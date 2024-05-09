@@ -9,6 +9,7 @@ export async function storePhotoInBucket(photo: File, user: Record<string, unkno
     const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
 
     const userId: string = uuid(user);
+    console.log("Are we getting a photo?", typeof photo);
     const { data, error } = await supabase.storage.from('photos').upload('file_path', photo);
 
     console.log('Was something uploaded?', data, error);
