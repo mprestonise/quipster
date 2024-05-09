@@ -3,14 +3,14 @@
 import { createClient } from '@supabase/supabase-js'
 import { v4 as uuid } from 'uuid';
 
-export async function storePhotoInBucket(photo: File, user: Record<string, unknown> | undefined) {
+export async function storePhotoInBucket(e: React.FormEvent<HTMLFormElement>, user: Record<string, unknown> | undefined) {
 
      // Create a single supabase client for interacting with your database
     const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
 
     const userId: string = uuid(user);
-    console.log("Are we getting a photo?", typeof photo);
-    const { data, error } = await supabase.storage.from('photos').upload('file_path', photo);
+    console.log("Are we getting a photo?", typeof e.currentTarget.files[0]);
+    const { data, error } = await supabase.storage.from('photos').upload('file_path', e.currentTarget.files[0]);
 
     console.log('Was something uploaded?', data, error);
 
