@@ -1,10 +1,11 @@
 'use client';
 
 import Button from '@/components/ui/Button';
+import { getURL } from '@/utils/helpers';
 import { useState } from 'react';
 import { uploadPhoto } from '@/utils/photos/client';
 
-export default function Uploader(userid: Record<string, unknown> | undefined, setCandidatePhoto: Function) {
+export default function Uploader(userid: Record<string, unknown> | undefined) {
 
     const [isUploading, setIsUploading] = useState(false);
     const [photo, setPhoto] = useState(Object);
@@ -13,7 +14,6 @@ export default function Uploader(userid: Record<string, unknown> | undefined, se
         setIsUploading(true);
         const uploadedPhoto = await uploadPhoto(e, userid);
         setPhoto(uploadedPhoto);
-        setCandidatePhoto(uploadedPhoto)
         setIsUploading(false);
       };
 
@@ -37,6 +37,7 @@ export default function Uploader(userid: Record<string, unknown> | undefined, se
         >
             {photo ? 'Uploaded' : 'Upload'}
       </Button>
+      {photo ? <img src={getURL + photo.fullPath} alt="uploaded image" className="preview-image" /> : null}
     </div>
     );
   }
