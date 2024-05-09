@@ -3,7 +3,7 @@
 import { storePhotoInBucket } from './server';
 
 // Define a function to create a Claude client for client-side operations
-export async function uploadPhoto(photo: File, user: string) {
+export async function uploadPhoto(photo: File, user: Record<string, unknown> | undefined) {
     const uploadedPhoto = await storePhotoInBucket(photo, user);
     return uploadedPhoto;
 }

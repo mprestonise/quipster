@@ -3,7 +3,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { getErrorRedirect, getStatusRedirect } from 'utils/helpers';
 
-export async function storePhotoInBucket(photo: File, user: string) {
+export async function storePhotoInBucket(photo: File, user: Record<string, unknown> | undefined) {
 
      // Create a single supabase client for interacting with your database
     const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
