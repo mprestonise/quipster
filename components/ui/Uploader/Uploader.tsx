@@ -37,7 +37,7 @@ export default function Uploader(userid: Record<string, unknown> | undefined) {
         >
             {photo ? 'Uploaded' : 'Upload'}
       </Button>
-      {photo ? <img src={getURL + photo.fullPath} alt="uploaded image" className="preview-image" /> : null}
+      {photo?.fullPath ? <img src={getURL + photo.fullPath} alt="uploaded image" className="preview-image" /> : null}
     </div>
     );
   }
