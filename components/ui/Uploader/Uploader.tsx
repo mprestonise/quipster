@@ -14,6 +14,7 @@ export default function Uploader(uuid: Record<string, unknown> | undefined) {
     const [photo, setPhoto] = useState<any>();
 
     const handleUpload = async (e: React.FormEvent<HTMLFormElement>) => {
+        console.log("What is e?", e);
         setIsUploading(true);
         e.preventDefault();
         const uploadedPhoto = await uploadPhoto(e.currentTarget.files, uuid);
