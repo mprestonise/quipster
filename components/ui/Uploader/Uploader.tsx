@@ -5,14 +5,20 @@ import { useState } from 'react';
 import { uploadPhoto } from '@/utils/photos/client';
 
 export default function Uploader(uuid: Record<string, unknown> | undefined) {
+
+    interface Photo {
+        url: string;
+    }
+
     const [isUploading, setIsUploading] = useState(false);
-    const [photo, setPhoto] = useState('');
+    const [photo, setPhoto] = useState<any>();
 
     const handleUpload = async (e: React.FormEvent<HTMLFormElement>) => {
         setIsUploading(true);
         console.log('What is the e.currentTarget.files object?', e.currentTarget.files);
         e.preventDefault();
         const uploadedPhoto = await uploadPhoto(e.currentTarget.files, uuid);
+        console.log("What is uploadedPhoto in Uploader.tsx?", uploadedPhoto);
         setPhoto(uploadedPhoto);
         setIsUploading(false);
     };

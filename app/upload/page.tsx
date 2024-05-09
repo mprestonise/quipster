@@ -10,7 +10,6 @@ export default async function Upload() {
   const {
     data: { user }
   } = await supabase.auth.getUser();
-  console.log('what is user.id?', typeof user?.id);
 
   const { data: subscription, error } = await supabase
     .from('subscriptions')

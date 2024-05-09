@@ -9,6 +9,8 @@ export async function storePhotoInBucket(photo: File, user: Record<string, unkno
      // Create a single supabase client for interacting with your database
     const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
 
+    console.log("What is the result of createClient?", supabase);
+
     const userId: string = uuid(user);
     const { data, error } = await supabase.storage.from('photos').upload(userId + '/' + 'file_path', photo);
 
@@ -25,10 +27,6 @@ export async function storePhotoInBucket(photo: File, user: Record<string, unkno
     );
     } else {
         console.log("The data returned from successful upload, ", data);
-        return getStatusRedirect(
-            '/upload',
-            'Uploaded successfully',
-            `Nice photo! Quippy is excited to write a caption for you`
-        );
+        return data;
     }
   }
