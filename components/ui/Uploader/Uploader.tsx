@@ -28,11 +28,6 @@ export default function Uploader(uuid: Record<string, unknown> | undefined) {
                 accept='image/webp, image/png, image/jpeg'
                 disabled={isUploading}
             ></input>
-            <input
-                type='text'
-                id='text'
-                name='text'
-            />
         </form>
         <Button
             variant="slim"
