@@ -1,5 +1,7 @@
 import { createClient } from '@/utils/supabase/server';
+import { getURL } from '@/utils/helpers';
 import { redirect } from 'next/navigation';
+import { useState } from 'react';
 import Claude from '@/components/ui/Claude/Claude';
 import Uploader from '@/components/ui/Uploader/Uploader';
 
@@ -28,6 +30,9 @@ export default async function Upload() {
     return redirect('/');
   }
 
+  const [photo, setPhoto] = useState(Object);
+
+  console.log('Does photo get updated?', photo);
 
   return (
     <section className="mb-32 bg-black">
@@ -39,9 +44,9 @@ export default async function Upload() {
           <p className="max-w-2xl m-auto mt-5 text-xl text-zinc-200 sm:text-center sm:text-2xl">
             Upload your photo for Quippy to write a caption for
           </p>
-          <h3 className="mt-24 text-2xl font-bold text-white sm:text-center sm:text-3xl">Let's start with a dummy photo and known brand settings</h3>
-          <img className="preview-image" src="/tiny-clouds.png" alt="Clouds" />
-          <Uploader />
+          <h3 className="mt-24 text-2xl font-bold text-white sm:text-center sm:text-3xl">Let's start with uploading a photo and using known brand settings</h3>
+          <Uploader userid={user.id} setCandidatePhoto={setPhoto} />
+          <img src={getURL + photo.fullPath} alt="uploaded image" className="preview-image" />
           <p className="max-w-2xl m-auto mt-5 text-xl text-zinc-200 sm:text-center sm:text-2xl">Brand settings: Witty, Friendly, and Quirky</p>
           <Claude />
         </div>

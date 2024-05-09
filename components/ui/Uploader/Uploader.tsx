@@ -1,18 +1,19 @@
 'use client';
 
 import Button from '@/components/ui/Button';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { uploadPhoto } from '@/utils/photos/client';
-import { storePhotoInBucket } from '@/utils/photos/server';
 
-export default function Uploader() {
-    const router = useRouter();
+export default function Uploader(userid: Record<string, unknown> | undefined, setCandidatePhoto: Function) {
+
     const [isUploading, setIsUploading] = useState(false);
+    const [photo, setPhoto] = useState(Object);
 
     const handleUpload = async (e: React.FormEvent<HTMLFormElement>) => {
         setIsUploading(true);
-        uploadPhoto(e, storePhotoInBucket, router);
+        const uploadedPhoto = await uploadPhoto(e, userid);
+        setPhoto(uploadedPhoto);
+        setCandidatePhoto(uploadedPhoto)
         setIsUploading(false);
       };
 
@@ -34,7 +35,7 @@ export default function Uploader() {
             loading={isUploading}
             disabled={isUploading}
         >
-            Upload
+            {photo ? 'Uploaded' : 'Upload'}
       </Button>
     </div>
     );

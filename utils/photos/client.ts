@@ -1,25 +1,23 @@
 'use client'
 
-import { redirectToPath } from './server';
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import { createClient } from '@/utils/supabase/client';
+import { v4 as uuid } from 'uuid';
+import { storePhotoInBucket } from '@/utils/photos/server';
 
-  export async function uploadPhoto(
-    e: React.FormEvent<HTMLFormElement>,
-    // uuid: Record<string, unknown> | undefined,
-    requestFunc: (formData: FormData) => Promise<string>,
-    router: AppRouterInstance | null = null
-  ): Promise<boolean | void> {
-    // Prevent default form submission refresh
-    e.preventDefault();
-  
-    const formData = new FormData(e.currentTarget);
-    const redirectUrl: string = await requestFunc(formData);
-  
-    if (router) {
-      // If client-side router is provided, use it to redirect
-      return router.push(redirectUrl);
-    } else {
-      // Otherwise, redirect server-side
-      return await redirectToPath(redirectUrl);
-    }
-  }
+export async function uploadPhoto(e: React.FormEvent<HTMLFormElement>, userid: Record<string, unknown> | undefined) {
+  // Prevent default form submission refresh
+  e.preventDefault();
+
+  const supabase = createClient()
+
+  const formData = new FormData(e.currentTarget);
+  let photo = formData.get('photo')!;
+  const userId = uuid(userid);
+  const clientSide = await supabase.storage.from('photos').upload(userId + '/' + 'photo', photo, {
+    cacheControl: '3600',
+    upsert: false
+});
+  // const uploadedPhoto = await storePhotoInBucket(formData, userid);
+
+  return clientSide;
+}
