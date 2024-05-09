@@ -14,7 +14,7 @@ export async function storePhotoInBucket(formData: FormData, user: Record<string
 
     // Get form data
     let photo = formData.get('photo')!;
-    console.log("what is photo?", typeof photo);
+    console.log("what is photo?", photo);
 
      // Create a single supabase client for interacting with your database
     const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
