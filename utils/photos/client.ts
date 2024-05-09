@@ -5,15 +5,15 @@ import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.share
 
   export async function uploadPhoto(
     e: React.FormEvent<HTMLFormElement>,
-    uuid: Record<string, unknown> | undefined,
-    requestFunc: (formData: FormData, user: Record<string, unknown> | undefined) => Promise<string>,
+    // uuid: Record<string, unknown> | undefined,
+    requestFunc: (formData: FormData) => Promise<string>,
     router: AppRouterInstance | null = null
   ): Promise<boolean | void> {
     // Prevent default form submission refresh
     e.preventDefault();
   
     const formData = new FormData(e.currentTarget);
-    const redirectUrl: string = await requestFunc(formData, uuid);
+    const redirectUrl: string = await requestFunc(formData);
   
     if (router) {
       // If client-side router is provided, use it to redirect

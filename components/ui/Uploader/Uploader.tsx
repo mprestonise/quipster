@@ -6,14 +6,13 @@ import { useState } from 'react';
 import { uploadPhoto } from '@/utils/photos/client';
 import { storePhotoInBucket } from '@/utils/photos/server';
 
-export default function Uploader(uuid: Record<string, unknown> | undefined) {
+export default function Uploader() {
     const router = useRouter();
     const [isUploading, setIsUploading] = useState(false);
-    const [photo, setPhoto] = useState();
 
     const handleUpload = async (e: React.FormEvent<HTMLFormElement>) => {
         setIsUploading(true);
-        uploadPhoto(e, uuid, storePhotoInBucket, router);
+        uploadPhoto(e, storePhotoInBucket, router);
         setIsUploading(false);
       };
 
@@ -35,10 +34,8 @@ export default function Uploader(uuid: Record<string, unknown> | undefined) {
             loading={isUploading}
             disabled={isUploading}
         >
-            {photo ? 'Uploaded' : 'Upload'}
+            Upload
       </Button>
-
-      {photo ? <p>A photo was uploaded!</p> : null}
     </div>
     );
   }
