@@ -9,7 +9,7 @@ export async function storePhotoInBucket(e: React.FormEvent<HTMLFormElement>, us
     const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
 
     const userId: string = uuid(user);
-    console.log("Are we getting a photo?", typeof e.currentTarget.files[0]);
+    console.log('What did we get from the client?', e);
     const { data, error } = await supabase.storage.from('photos').upload('file_path', e.currentTarget.files[0]);
 
     console.log('Was something uploaded?', data, error);

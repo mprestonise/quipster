@@ -6,18 +6,13 @@ import { uploadPhoto } from '@/utils/photos/client';
 
 export default function Uploader(uuid: Record<string, unknown> | undefined) {
 
-    interface Photo {
-        url: string;
-    }
-
     const [isUploading, setIsUploading] = useState(false);
     const [photo, setPhoto] = useState<any>();
 
     const handleUpload = async (e: React.FormEvent<HTMLFormElement>) => {
-        console.log("What is e?", e);
         setIsUploading(true);
         e.preventDefault();
-        const uploadedPhoto = await uploadPhoto(e.currentTarget.files, uuid);
+        const uploadedPhoto = await uploadPhoto(e, uuid);
         console.log("What is uploadedPhoto in Uploader.tsx?", uploadedPhoto);
         setPhoto(uploadedPhoto);
         setIsUploading(false);
@@ -25,14 +20,19 @@ export default function Uploader(uuid: Record<string, unknown> | undefined) {
 
     return (
     <div className="max-w-2xl m-auto mt-5 text-sm sm:text-center sm:text-xs">
-        <form id="imageUploadForm" onSubmit={(e) => handleUpload(e)}>
+        <form id="imageUploadForm" encType="multipart/form-data" onSubmit={(e) => handleUpload(e)}>
             <input
-            type='file'
-            id='photo'
-            name='photo'
-            accept='image/webp, image/png, image/jpeg'
-            disabled={isUploading}
+                type='file'
+                id='photo'
+                name='photo'
+                accept='image/webp, image/png, image/jpeg'
+                disabled={isUploading}
             ></input>
+            <input
+                type='text'
+                id='text'
+                name='text'
+            />
         </form>
         <Button
             variant="slim"
