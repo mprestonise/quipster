@@ -1,9 +1,8 @@
 'use client';
 
 import Button from '@/components/ui/Button';
-import { getURL } from '@/utils/helpers';
 import { useState } from 'react';
-import { uploadPhoto } from '@/utils/photos/client';
+import { uploadPhoto, updateUserWithPhoto } from '@/utils/photos/client';
 
 export default function Uploader(userid: Record<string, unknown> | undefined) {
 
@@ -14,6 +13,7 @@ export default function Uploader(userid: Record<string, unknown> | undefined) {
         setIsUploading(true);
         const uploadedPhoto = await uploadPhoto(e, userid);
         console.log(uploadedPhoto);
+        const userIsUpdated = await updateUserWithPhoto(uploadedPhoto, userid);
         setPhoto(uploadedPhoto);
         setIsUploading(false);
       };
