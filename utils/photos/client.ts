@@ -28,8 +28,6 @@ export async function uploadPhoto(e: React.FormEvent<HTMLFormElement>, userid: R
   const formData = new FormData(e.currentTarget);
   let photo = formData.get('photo')!;
 
-  console.log('Do I get any other data from e.currentTarget?', e.currentTarget);
-
   const { data, error } = await supabase.storage.from('photos').upload(userid?.userid + '/' + uuid(), photo, {
     cacheControl: '3600',
     upsert: false
@@ -45,8 +43,6 @@ export async function uploadPhoto(e: React.FormEvent<HTMLFormElement>, userid: R
 export async function updateUserWithPhoto(photo: UploadResponse) {
 
   const supabase = createClient()
-
-  console.log("Trying to update the user with the imageURL", photo);
 
   const { data, error } = await supabase.auth.updateUser({
     data: { imageURL: photo.id }
@@ -64,7 +60,7 @@ export async function getSignedURL(photo: UploadResponse) {
 
   const supabase = createClient()
 
-  const { data } = await supabase.storage.from('photos').createSignedUrl(photo.fullPath!, 3600, {
+  const { data } = await supabase.storage.from('photos').createSignedUrl(photo.path!, 3600, {
     transform: {
       width: 400
     }

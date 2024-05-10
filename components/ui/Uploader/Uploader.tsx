@@ -12,7 +12,6 @@ export default function Uploader(userid: Record<string, unknown> | undefined) {
     const handleUpload = async (e: React.FormEvent<HTMLFormElement>) => {
         setIsUploading(true);
         const uploadedPhoto = await uploadPhoto(e, userid);
-        console.log(uploadedPhoto);
         if (!uploadedPhoto.message) {
             const userIsUpdated = await updateUserWithPhoto(uploadedPhoto);
             if (!userIsUpdated.message) {
