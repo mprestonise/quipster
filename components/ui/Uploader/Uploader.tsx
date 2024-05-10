@@ -27,7 +27,7 @@ export default function Uploader(userid: Record<string, unknown> | undefined, up
         }
     };
 
-    console.log('What is userid in uploader?', userid);
+    console.log('What is userid in uploader?', userid?.id);
 
     return (
     <div className="max-w-2xl m-auto mt-5 text-sm sm:text-center sm:text-xs">
