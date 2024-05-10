@@ -6,6 +6,8 @@ import { uploadPhoto, updateUserWithPhoto, getSignedURL } from '@/utils/photos/c
 
 export default function Uploader(userid: Record<string, unknown>, updatePhotoURL: Function) {
 
+    console.log('What is userid in uploader?', userid);
+
     const [isUploading, setIsUploading] = useState(false);
     const [isEmpty, setIsEmpty] = useState(true);
     const [photo, setPhoto] = useState('');
@@ -26,8 +28,6 @@ export default function Uploader(userid: Record<string, unknown>, updatePhotoURL
             setIsUploading(false);
         }
     };
-
-    console.log('What is userid in uploader?', userid);
 
     return (
     <div className="max-w-2xl m-auto mt-5 text-sm sm:text-center sm:text-xs">
