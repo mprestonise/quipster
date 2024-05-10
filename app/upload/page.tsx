@@ -1,8 +1,6 @@
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import Captions from '@/components/ui/Captions/Captions';
-import Claude from '@/components/ui/Claude/Claude';
-import Uploader from '@/components/ui/Uploader/Uploader';
 
 export default async function Upload() {
   const supabase = createClient();

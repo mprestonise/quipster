@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import useClipboard from "react-use-clipboard";
+import Button from '@/components/ui/Button';
 import Claude from '@/components/ui/Claude/Claude';
 import Uploader from '@/components/ui/Uploader/Uploader';
 
@@ -11,6 +13,7 @@ interface CaptionsProps {
 export default function Captions({ userid }: CaptionsProps) {
     const [photo, setPhoto] = useState({ url: '' });
     const [caption, setCaption] = useState<string | undefined>(undefined);
+    const [isCopied, setCopied] = useClipboard(caption ? caption: 'text');
 
     useEffect(() => {
         //Runs on the first render
@@ -25,7 +28,7 @@ export default function Captions({ userid }: CaptionsProps) {
         {photo.url !== '' ? <img className="mt-5 preview-image" src={photo.url} alt="Uploaded photo" /> : null}
         <p className="max-w-2xl m-auto mt-5 text-xl text-zinc-200 sm:text-center sm:text-2xl">Brand settings: Witty, Friendly, and Quirky</p>
         <Claude photo={photo} updateCaption={setCaption} />
-        {caption ? <p className="mt-5">{caption}</p> : <p className="mt-5">Click the button above to generate a caption</p>}
+        {caption ? <div><p className="mt-5">{caption}</p><Button onClick={setCopied}>{isCopied ? 'Copied' : 'Copy'}</Button></div> : <p className="mt-5">Click the button above to generate a caption</p>}
     </div>
     );
   }
