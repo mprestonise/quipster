@@ -28,7 +28,7 @@ export async function generateCaption(file: string, prompt: string) {
                     },
                     {
                       "type": "text",
-                      "text": `Write an engaging, ${[prompt]} caption for this photo of a product so that it can be published to Instagram and engage buyers. Avoid adding anything other than the caption, avoid commentary, avoid any additional updates or notes`
+                      "text": `Write an engaging, ${[prompt]} caption for this photo of a product so that it can be published to Instagram and engage buyers. Avoid cliches, avoid adding anything other than the caption, avoid commentary, avoid any additional updates or notes`
                   }
                 ],
             }
