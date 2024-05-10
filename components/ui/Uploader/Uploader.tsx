@@ -48,7 +48,7 @@ export default function Uploader(userid: Record<string, unknown>, updatePhotoURL
         >
             Upload
       </Button>
-      {photo !== '' ? <img className="mt-5 preview-image" src={photo} alt="Uploaded photo" /> : null}
+      {/* {photo !== '' ? <img className="mt-5 preview-image" src={photo} alt="Uploaded photo" /> : null} */}
     </div>
     );
   }
