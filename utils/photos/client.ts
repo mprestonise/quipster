@@ -3,6 +3,11 @@
 import { createClient } from '@/utils/supabase/client';
 import { v4 as uuid } from 'uuid';
 
+interface FileToUpload {
+  name: string;
+  file: FormDataEntryValue
+}
+
 interface UploadResponse {
   id: string | null;
   path: string | null;
@@ -25,20 +30,21 @@ export async function uploadPhoto(e: React.FormEvent<HTMLFormElement>, userid: s
 
   const supabase = createClient()
 
-  const formData = new FormData(e.currentTarget);
-  let photo = formData.get('photo')!;
+  const photo = new FormData(e.currentTarget).get('photo');
+
+  if (photo instanceof File) {
+    const { data, error } = await supabase.storage.from('photos').upload(userid + '/' + uuid() + '-' + photo.name, photo, {
+      cacheControl: '3600',
+      upsert: false
+    }) as unknown as { data: UploadResponse; error: UploadResponse };
   
-  console.log("What other data can we access through photo?", photo);
-
-  const { data, error } = await supabase.storage.from('photos').upload(userid + '/' + uuid(), photo, {
-    cacheControl: '3600',
-    upsert: false
-  }) as unknown as { data: UploadResponse; error: UploadResponse };
-
-  if (error) {
-    return error;
+    if (error) {
+      return error;
+    } else {
+      return data;
+    }
   } else {
-    return data;
+    return { id: null, path: null, fullPath: null, message: 'No file was attached' };
   }
 }
 
