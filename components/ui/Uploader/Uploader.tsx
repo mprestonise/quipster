@@ -6,8 +6,6 @@ import { uploadPhoto, updateUserWithPhoto, getSignedURL } from '@/utils/photos/c
 
 export default function Uploader(userid: Record<string, unknown>, updatePhotoURL: Function) {
 
-    console.log('What is userid in uploader?', userid);
-
     const [isUploading, setIsUploading] = useState(false);
     const [isEmpty, setIsEmpty] = useState(true);
     const [photo, setPhoto] = useState('');
@@ -19,10 +17,10 @@ export default function Uploader(userid: Record<string, unknown>, updatePhotoURL
             const userIsUpdated = await updateUserWithPhoto(uploadedPhoto);
             if (!userIsUpdated.message) {
                 const signedURL = await getSignedURL(uploadedPhoto);
-                console.log('what is the signedURL?', signedURL)
                 setPhoto(signedURL!.signedUrl);
-                updatePhotoURL(signedURL!.signedUrl);
                 setIsUploading(false);
+                console.log("About to call updatePhotoURL from inside Uploader.tsx", isUploading);
+                updatePhotoURL(signedURL!.signedUrl);
             }
         } else {
             setIsUploading(false);
