@@ -15,7 +15,10 @@ export default function Uploader(userid: Record<string, unknown> | undefined) {
         console.log(uploadedPhoto);
         if (!uploadedPhoto.message) {
             const userIsUpdated = await updateUserWithPhoto(uploadedPhoto, userid);
-            console.log('userIsUpdated', userIsUpdated);
+            if (!userIsUpdated.message) {
+                // use the imageURL field to get a signed URL for displaying in the UI and sending to Claude
+                console.log('userIsUpdated', userIsUpdated?.user)
+            }
         }
         setPhoto(uploadedPhoto);
         setIsUploading(false);

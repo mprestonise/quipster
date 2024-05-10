@@ -10,6 +10,15 @@ interface UploadResponse {
   message: string | null;
 }
 
+interface UpdateUserResponse {
+  user: {
+    user_metadata: {
+      imageUrl: string
+    }
+  } | null;
+  message: string | null;
+}
+
 export async function uploadPhoto(e: React.FormEvent<HTMLFormElement>, userid: Record<string, unknown> | undefined) {
   // Prevent default form submission refresh
   e.preventDefault();
@@ -18,6 +27,8 @@ export async function uploadPhoto(e: React.FormEvent<HTMLFormElement>, userid: R
 
   const formData = new FormData(e.currentTarget);
   let photo = formData.get('photo')!;
+
+  console.log('Do I get any other data from photo?', photo);
 
   const { data, error } = await supabase.storage.from('photos').upload(userid?.userid + '/' + uuid(), photo, {
     cacheControl: '3600',
@@ -39,13 +50,12 @@ export async function updateUserWithPhoto(photo: UploadResponse, userid: Record<
 
   const { data, error } = await supabase.auth.updateUser({
     data: { imageURL: photo.id }
-  })
+  }) as unknown as { data: UpdateUserResponse; error: UpdateUserResponse }
 
   if (error) {
     return error;
   }
   else {
-    console.log('What was returned from updateUser?', data);
     return data;
   }
 
