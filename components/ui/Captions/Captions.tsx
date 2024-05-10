@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Claude from '@/components/ui/Claude/Claude';
 import Uploader from '@/components/ui/Uploader/Uploader';
 
@@ -9,6 +9,11 @@ export default function Captions(userid: Record<string, unknown>) {
     const [caption, setCaption] = useState<string | undefined>(undefined);
 
     console.log('What is photo in Captions?', photo);
+
+    useEffect(() => {
+        //Runs on the first render
+        //And any time any dependency value changes
+      }, [photo]);
 
     return (
     <div className="max-w-2xl m-auto mt-5 text-sm sm:text-center sm:text-xs">
