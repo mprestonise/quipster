@@ -28,6 +28,8 @@ export async function uploadPhoto(e: React.FormEvent<HTMLFormElement>, userid: R
   const formData = new FormData(e.currentTarget);
   let photo = formData.get('photo')!;
 
+  console.log("Okay, what is userid?", userid);
+
   const { data, error } = await supabase.storage.from('photos').upload(userid?.id + '/' + uuid(), photo, {
     cacheControl: '3600',
     upsert: false
