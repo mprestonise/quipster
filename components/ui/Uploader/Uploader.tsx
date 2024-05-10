@@ -4,7 +4,7 @@ import Button from '@/components/ui/Button';
 import { useState } from 'react';
 import { uploadPhoto, updateUserWithPhoto, getSignedURL } from '@/utils/photos/client';
 
-export default function Uploader(userid: Record<string, unknown> | undefined, updatePhotoURL: Function) {
+export default function Uploader(userid: Record<string, unknown>, updatePhotoURL: Function) {
 
     const [isUploading, setIsUploading] = useState(false);
     const [isEmpty, setIsEmpty] = useState(true);
@@ -27,7 +27,7 @@ export default function Uploader(userid: Record<string, unknown> | undefined, up
         }
     };
 
-    console.log('What is userid in uploader?', userid?.id);
+    console.log('What is userid in uploader?', userid);
 
     return (
     <div className="max-w-2xl m-auto mt-5 text-sm sm:text-center sm:text-xs">

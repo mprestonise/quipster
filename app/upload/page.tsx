@@ -29,7 +29,7 @@ export default async function Upload() {
     return redirect('/');
   }
 
-  console.log('What is user in upload page.tsx?', user);
+  console.log('What is user.id in upload page.tsx?', user.id);
 
   return (
     <section className="mb-32 bg-black">
