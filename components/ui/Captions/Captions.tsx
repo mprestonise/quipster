@@ -8,6 +8,8 @@ export default function Captions(userid: Record<string, unknown> | undefined) {
     const [photo, setPhoto] = useState({ url: '' });
     const [caption, setCaption] = useState<string | undefined>(undefined);
 
+    console.log('What is userid in Captions?', userid);
+
     return (
     <div className="max-w-2xl m-auto mt-5 text-sm sm:text-center sm:text-xs">
         <h3 className="mt-24 text-2xl font-bold text-white sm:text-center sm:text-3xl">Let's start with uploading a photo and using known brand settings</h3>

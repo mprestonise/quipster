@@ -25,7 +25,9 @@ export default function Uploader(userid: Record<string, unknown> | undefined, up
         } else {
             setIsUploading(false);
         }
-      };
+    };
+
+    console.log('What is userid in uploader?', userid);
 
     return (
     <div className="max-w-2xl m-auto mt-5 text-sm sm:text-center sm:text-xs">
