@@ -19,7 +19,7 @@ interface UpdateUserResponse {
   message: string | null;
 }
 
-export async function uploadPhoto(e: React.FormEvent<HTMLFormElement>, userid: Record<string, unknown> | undefined) {
+export async function uploadPhoto(e: React.FormEvent<HTMLFormElement>, userid: Record<string, unknown>) {
   // Prevent default form submission refresh
   e.preventDefault();
 
@@ -30,7 +30,7 @@ export async function uploadPhoto(e: React.FormEvent<HTMLFormElement>, userid: R
 
   console.log("Okay, what is userid?", userid);
 
-  const { data, error } = await supabase.storage.from('photos').upload(userid + '/' + uuid(), photo, {
+  const { data, error } = await supabase.storage.from('photos').upload(userid.userid + '/' + uuid(), photo, {
     cacheControl: '3600',
     upsert: false
   }) as unknown as { data: UploadResponse; error: UploadResponse };
