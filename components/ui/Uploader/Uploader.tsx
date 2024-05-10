@@ -8,7 +8,7 @@ export default function Uploader(userid: Record<string, unknown>, updatePhotoURL
 
     const [isUploading, setIsUploading] = useState(false);
     const [isEmpty, setIsEmpty] = useState(true);
-    const [photo, setPhoto] = useState('');
+    // const [photo, setPhoto] = useState('');
 
     const handleUpload = async (e: React.FormEvent<HTMLFormElement>) => {
         setIsUploading(true);
@@ -17,10 +17,9 @@ export default function Uploader(userid: Record<string, unknown>, updatePhotoURL
             const userIsUpdated = await updateUserWithPhoto(uploadedPhoto);
             if (!userIsUpdated.message) {
                 const signedURL = await getSignedURL(uploadedPhoto);
-                setPhoto(signedURL!.signedUrl);
-                setIsUploading(false);
-                console.log("About to call updatePhotoURL from inside Uploader.tsx", isUploading);
+                // setPhoto(signedURL!.signedUrl);
                 updatePhotoURL(signedURL!.signedUrl);
+                setIsUploading(false);
             }
         } else {
             setIsUploading(false);
