@@ -28,7 +28,7 @@ export async function uploadPhoto(e: React.FormEvent<HTMLFormElement>, userid: R
   const formData = new FormData(e.currentTarget);
   let photo = formData.get('photo')!;
 
-  console.log('Do I get any other data from photo?', photo);
+  console.log('Do I get any other data from e.currentTarget?', e.currentTarget);
 
   const { data, error } = await supabase.storage.from('photos').upload(userid?.userid + '/' + uuid(), photo, {
     cacheControl: '3600',
@@ -42,11 +42,11 @@ export async function uploadPhoto(e: React.FormEvent<HTMLFormElement>, userid: R
   }
 }
 
-export async function updateUserWithPhoto(photo: UploadResponse, userid: Record<string, unknown> | undefined) {
+export async function updateUserWithPhoto(photo: UploadResponse) {
 
   const supabase = createClient()
 
-  console.log("Trying to update the user with the imageURL", userid?.userid, photo);
+  console.log("Trying to update the user with the imageURL", photo);
 
   const { data, error } = await supabase.auth.updateUser({
     data: { imageURL: photo.id }
@@ -58,15 +58,19 @@ export async function updateUserWithPhoto(photo: UploadResponse, userid: Record<
   else {
     return data;
   }
+}
 
-  // else {
-  //   const { signedData, signedError } = await supabase.storage.from('photos').createSignedUrl(data['fullPath'], 60000, {
-  //     transform: {
-  //       width: 400
-  //     },
-  //   })
-  
-  // https://quipster.vercel.app/photos/3f975a6c-ee1d-4064-85c2-d99cecf38a9b/93c07a59-b69f-467c-9453-10de54ba36ae
-  
-  // return signedError ? signedError : signedData.signedUrl;
+export async function getSignedURL(photo: UploadResponse) {
+
+  const supabase = createClient()
+
+  const { data } = await supabase.storage.from('photos').createSignedUrl(photo.fullPath!, 3600, {
+    transform: {
+      width: 400
+    }
+  })
+
+  return data;
+
+  // https://ocuwiawvhyywobpnmhyl.supabase.co/storage/v1/object/sign/photos/0bb5404e-442d-45b2-872f-c88a66d9e8ba/c994f2fd-8e46-4aad-8837-2d0864878b97?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJwaG90b3MvMGJiNTQwNGUtNDQyZC00NWIyLTg3MmYtYzg4YTY2ZDllOGJhL2M5OTRmMmZkLThlNDYtNGFhZC04ODM3LTJkMDg2NDg3OGI5NyIsImlhdCI6MTcxNTMwOTU0NywiZXhwIjoxNzE1OTE0MzQ3fQ.M1OkvDUz6GOFD8Lb-0eHacOCnYveifrZqV6YALnS6ZA&t=2024-05-10T02%3A52%3A27.605Z
 }

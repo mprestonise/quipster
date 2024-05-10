@@ -2,7 +2,7 @@
 
 import Button from '@/components/ui/Button';
 import { useState } from 'react';
-import { uploadPhoto, updateUserWithPhoto } from '@/utils/photos/client';
+import { uploadPhoto, updateUserWithPhoto, getSignedURL } from '@/utils/photos/client';
 
 export default function Uploader(userid: Record<string, unknown> | undefined) {
 
@@ -14,10 +14,12 @@ export default function Uploader(userid: Record<string, unknown> | undefined) {
         const uploadedPhoto = await uploadPhoto(e, userid);
         console.log(uploadedPhoto);
         if (!uploadedPhoto.message) {
-            const userIsUpdated = await updateUserWithPhoto(uploadedPhoto, userid);
+            const userIsUpdated = await updateUserWithPhoto(uploadedPhoto);
             if (!userIsUpdated.message) {
                 // use the imageURL field to get a signed URL for displaying in the UI and sending to Claude
                 console.log('userIsUpdated', userIsUpdated?.user)
+                const signedURL = await getSignedURL(uploadedPhoto);
+                console.log('what is the signedURL?', signedURL)
             }
         }
         setPhoto(uploadedPhoto);
