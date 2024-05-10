@@ -4,7 +4,12 @@ import Button from '@/components/ui/Button';
 import { useState } from 'react';
 import { uploadPhoto, updateUserWithPhoto, getSignedURL } from '@/utils/photos/client';
 
-export default function Uploader(userid: Record<string, unknown>, updatePhotoURL: Function) {
+interface UploaderProps {
+    userid: string;
+    updatePhotoURL: (url: string) => void;
+}
+
+export default function Uploader({ userid, updatePhotoURL }: UploaderProps) {
 
     const [isUploading, setIsUploading] = useState(false);
     const [isEmpty, setIsEmpty] = useState(true);
@@ -18,6 +23,7 @@ export default function Uploader(userid: Record<string, unknown>, updatePhotoURL
             if (!userIsUpdated.message) {
                 const signedURL = await getSignedURL(uploadedPhoto);
                 // setPhoto(signedURL!.signedUrl);
+                console.log("updatePhotoURL type:", typeof updatePhotoURL);
                 updatePhotoURL(signedURL!.signedUrl);
                 setIsUploading(false);
             }
