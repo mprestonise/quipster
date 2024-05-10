@@ -67,6 +67,4 @@ export async function getSignedURL(photo: UploadResponse) {
   })
 
   return data;
-
-  // https://ocuwiawvhyywobpnmhyl.supabase.co/storage/v1/object/sign/photos/0bb5404e-442d-45b2-872f-c88a66d9e8ba/c994f2fd-8e46-4aad-8837-2d0864878b97?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJwaG90b3MvMGJiNTQwNGUtNDQyZC00NWIyLTg3MmYtYzg4YTY2ZDllOGJhL2M5OTRmMmZkLThlNDYtNGFhZC04ODM3LTJkMDg2NDg3OGI5NyIsImlhdCI6MTcxNTMwOTU0NywiZXhwIjoxNzE1OTE0MzQ3fQ.M1OkvDUz6GOFD8Lb-0eHacOCnYveifrZqV6YALnS6ZA&t=2024-05-10T02%3A52%3A27.605Z
 }

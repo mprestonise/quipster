@@ -59,7 +59,11 @@ p a {
 }
 
 .preview-image {
-  width: 140px;
+  width: 240px;
   margin: 2rem auto 0;
   border-radius: 3px;
+}
+
+#imageUploadForm {
+  margin-bottom: 2rem;
 }

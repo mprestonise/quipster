@@ -4,10 +4,11 @@ import Button from '@/components/ui/Button';
 import { useState } from 'react';
 import { uploadPhoto, updateUserWithPhoto, getSignedURL } from '@/utils/photos/client';
 
-export default function Uploader(userid: Record<string, unknown> | undefined) {
+export default function Uploader(userid: Record<string, unknown> | undefined, updatePhotoURL: Function) {
 
     const [isUploading, setIsUploading] = useState(false);
-    const [photo, setPhoto] = useState(Object);
+    const [isEmpty, setIsEmpty] = useState(true);
+    const [photo, setPhoto] = useState('');
 
     const handleUpload = async (e: React.FormEvent<HTMLFormElement>) => {
         setIsUploading(true);
@@ -17,7 +18,8 @@ export default function Uploader(userid: Record<string, unknown> | undefined) {
             if (!userIsUpdated.message) {
                 const signedURL = await getSignedURL(uploadedPhoto);
                 console.log('what is the signedURL?', signedURL)
-                setPhoto(signedURL?.signedUrl);
+                setPhoto(signedURL!.signedUrl);
+                updatePhotoURL(signedURL!.signedUrl);
                 setIsUploading(false);
             }
         } else {
@@ -31,6 +33,7 @@ export default function Uploader(userid: Record<string, unknown> | undefined) {
             <input
                 type='file'
                 id='photo'
+                onChange={(e) => setIsEmpty(e.target.files?.length == 0)}
                 name='photo'
                 accept='image/webp, image/png, image/jpeg'
                 disabled={isUploading}
@@ -41,11 +44,11 @@ export default function Uploader(userid: Record<string, unknown> | undefined) {
             type="submit"
             form="imageUploadForm"
             loading={isUploading}
-            disabled={isUploading}
+            disabled={isUploading || isEmpty}
         >
             Upload
       </Button>
-      {photo ? <img className="mt-5" src={photo} alt="Uploaded photo" /> : null}
+      {photo !== '' ? <img className="mt-5 preview-image" src={photo} alt="Uploaded photo" /> : null}
     </div>
     );
   }

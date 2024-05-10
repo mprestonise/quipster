@@ -4,13 +4,15 @@ import Button from '@/components/ui/Button';
 import { useState } from 'react';
 import { requestCaption } from '@/utils/claude/client';
 
-export default function Claude() {
+export default function Claude({ photo }: { photo: { url: string } }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [caption, setCaption] = useState('');
 
+    console.log("Inside of Claude, what is photo?", photo.url);
+
     const handleClaudeRequest = async () => {
         setIsSubmitting(true);
-        const generatedCaption = await requestCaption('witty, friendly, and quirky');
+        const generatedCaption = await requestCaption(photo.url, 'witty, friendly, and quirky');
         setCaption(generatedCaption);
         setIsSubmitting(false);
       };
