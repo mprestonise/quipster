@@ -19,10 +19,12 @@ export default function Uploader(userid: Record<string, unknown> | undefined) {
                 console.log('userIsUpdated', userIsUpdated?.user)
                 const signedURL = await getSignedURL(uploadedPhoto);
                 console.log('what is the signedURL?', signedURL)
+                setPhoto(signedURL);
+                setIsUploading(false);
             }
+        } else {
+            setIsUploading(false);
         }
-        setPhoto(uploadedPhoto);
-        setIsUploading(false);
       };
 
     return (
@@ -43,8 +45,9 @@ export default function Uploader(userid: Record<string, unknown> | undefined) {
             loading={isUploading}
             disabled={isUploading}
         >
-            {photo ? 'Uploaded' : 'Upload'}
+            Upload
       </Button>
+      {photo ? <img className="mt-5" src={photo} alt="Uploaded photo" /> : null}
     </div>
     );
   }
