@@ -29,6 +29,8 @@ export async function updateUserWithPhoto(photo: { path: string | null}, userid:
 
   const supabase = createClient()
 
+  console.log("Trying to update the user with the imageURL", userid, photo);
+  
   const { data, error } = await supabase.auth.updateUser({
     data: { imageURL: photo.path }
   })
