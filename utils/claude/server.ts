@@ -34,5 +34,6 @@ export async function generateCaption(file: string, prompt: string) {
             }
           ]
     });
+    console.log("What is the outcome of the API call?", generateCaption);
     return generatedCaption.content[0].text;
   }

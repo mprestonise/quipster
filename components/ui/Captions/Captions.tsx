@@ -8,7 +8,7 @@ export default function Captions(userid: Record<string, unknown>) {
     const [photo, setPhoto] = useState({ url: '' });
     const [caption, setCaption] = useState<string | undefined>(undefined);
 
-    console.log('What is userid.userid in Captions?', userid.userid);
+    console.log('What is photo in Captions?', photo);
 
     return (
     <div className="max-w-2xl m-auto mt-5 text-sm sm:text-center sm:text-xs">

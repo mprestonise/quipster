@@ -15,9 +15,12 @@ export default function Claude({ photo, updateCaption }: ClaudeProps) {
     const handleClaudeRequest = async () => {
         setIsSubmitting(true);
         const generatedCaption = await requestCaption(photo.url, 'witty, friendly, and quirky');
+        console.log("Does a caption get returned?", generatedCaption);
         updateCaption(generatedCaption);
         setIsSubmitting(false);
-      };
+    };
+
+    console.log("What is photo inside Claude.tsx?", photo.url);
 
     return (
     <div className="max-w-2xl m-auto mt-5 text-sm sm:text-center sm:text-xs">
