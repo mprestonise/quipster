@@ -3,42 +3,49 @@
 import { createClient } from '@/utils/supabase/client';
 import { v4 as uuid } from 'uuid';
 
+interface UploadResponse {
+  id: string | null;
+  path: string | null;
+  fullPath: string | null;
+  message: string | null;
+}
+
 export async function uploadPhoto(e: React.FormEvent<HTMLFormElement>, userid: Record<string, unknown> | undefined) {
   // Prevent default form submission refresh
   e.preventDefault();
 
   const supabase = createClient()
 
-  console.log("What is my userid right now?", userid);
-
   const formData = new FormData(e.currentTarget);
   let photo = formData.get('photo')!;
+
   const { data, error } = await supabase.storage.from('photos').upload(userid?.userid + '/' + uuid(), photo, {
     cacheControl: '3600',
     upsert: false
-  });
+  }) as unknown as { data: UploadResponse; error: UploadResponse };
 
   if (error) {
-    return { path: 'Error!', message: error.message};
+    return error;
   } else {
     return data;
   }
 }
 
-export async function updateUserWithPhoto(photo: { path: string | null}, userid: Record<string, unknown> | undefined) {
+export async function updateUserWithPhoto(photo: UploadResponse, userid: Record<string, unknown> | undefined) {
 
   const supabase = createClient()
 
-  console.log("Trying to update the user with the imageURL", userid, photo);
-  
+  console.log("Trying to update the user with the imageURL", userid?.userid, photo);
+
   const { data, error } = await supabase.auth.updateUser({
-    data: { imageURL: photo.path }
+    data: { imageURL: photo.id }
   })
 
   if (error) {
     return error;
   }
   else {
+    console.log('What was returned from updateUser?', data);
     return data;
   }
 

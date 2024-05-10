@@ -13,7 +13,10 @@ export default function Uploader(userid: Record<string, unknown> | undefined) {
         setIsUploading(true);
         const uploadedPhoto = await uploadPhoto(e, userid);
         console.log(uploadedPhoto);
-        const userIsUpdated = await updateUserWithPhoto(uploadedPhoto, userid);
+        if (!uploadedPhoto.message) {
+            const userIsUpdated = await updateUserWithPhoto(uploadedPhoto, userid);
+            console.log('userIsUpdated', userIsUpdated);
+        }
         setPhoto(uploadedPhoto);
         setIsUploading(false);
       };
