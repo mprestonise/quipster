@@ -4,16 +4,18 @@ import Button from '@/components/ui/Button';
 import { useState } from 'react';
 import { requestCaption } from '@/utils/claude/client';
 
-export default function Claude({ photo }: { photo: { url: string } }) {
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [caption, setCaption] = useState('');
+interface ClaudeProps {
+  photo: { url: string };
+  updateCaption: React.Dispatch<React.SetStateAction<string | undefined>>;
+}
 
-    console.log("Inside of Claude, what is photo?", photo.url);
+export default function Claude({ photo, updateCaption }: ClaudeProps) {
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleClaudeRequest = async () => {
         setIsSubmitting(true);
         const generatedCaption = await requestCaption(photo.url, 'witty, friendly, and quirky');
-        setCaption(generatedCaption);
+        updateCaption(generatedCaption);
         setIsSubmitting(false);
       };
 
@@ -25,9 +27,8 @@ export default function Claude({ photo }: { photo: { url: string } }) {
         loading={isSubmitting}
         disabled={isSubmitting}
       >
-        {caption ? 'Get another caption' : 'Get caption'}
+        Get caption
       </Button>
-      {caption ? <p className="mt-5">{caption}</p> : <p className="mt-5">Click the button above to generate a caption</p>}
     </div>
     );
   }

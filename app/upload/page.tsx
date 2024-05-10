@@ -1,5 +1,6 @@
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
+import Captions from '@/components/ui/Captions/Captions';
 import Claude from '@/components/ui/Claude/Claude';
 import Uploader from '@/components/ui/Uploader/Uploader';
 
@@ -28,14 +29,6 @@ export default async function Upload() {
     return redirect('/');
   }
 
-  let uploadedPhoto = { url: '' };
-
-  function updatePhotoURL(url: string) {
-    uploadedPhoto['url'] = url;
-  }
-
-  console.log('Does updatePhotoURL ever get updated?', uploadedPhoto);
-
   return (
     <section className="mb-32 bg-black">
       <div className="max-w-6xl px-4 py-8 mx-auto sm:px-6 sm:pt-24 lg:px-8">
@@ -46,10 +39,11 @@ export default async function Upload() {
           <p className="max-w-2xl m-auto mt-5 text-xl text-zinc-200 sm:text-center sm:text-2xl">
             Upload your photo for Quippy to write a caption for
           </p>
-          <h3 className="mt-24 text-2xl font-bold text-white sm:text-center sm:text-3xl">Let's start with uploading a photo and using known brand settings</h3>
+          <Captions userid={user.id} />
+          {/* <h3 className="mt-24 text-2xl font-bold text-white sm:text-center sm:text-3xl">Let's start with uploading a photo and using known brand settings</h3>
           <Uploader userid={user.id} updatePhotoURL={updatePhotoURL} />
           <p className="max-w-2xl m-auto mt-5 text-xl text-zinc-200 sm:text-center sm:text-2xl">Brand settings: Witty, Friendly, and Quirky</p>
-          <Claude photo={uploadedPhoto} />
+          <Claude photo={uploadedPhoto} /> */}
         </div>
       </div>
     </section>
