@@ -3,11 +3,6 @@
 import { createClient } from '@/utils/supabase/client';
 import { v4 as uuid } from 'uuid';
 
-interface FileToUpload {
-  name: string;
-  file: FormDataEntryValue
-}
-
 interface UploadResponse {
   id: string | null;
   path: string | null;

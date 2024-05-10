@@ -22,8 +22,6 @@ export default function Uploader({ userid, updatePhotoURL }: UploaderProps) {
             const userIsUpdated = await updateUserWithPhoto(uploadedPhoto);
             if (!userIsUpdated.message) {
                 const signedURL = await getSignedURL(uploadedPhoto);
-                // setPhoto(signedURL!.signedUrl);
-                console.log("updatePhotoURL type:", typeof updatePhotoURL);
                 updatePhotoURL(signedURL!.signedUrl);
                 setIsUploading(false);
             }
